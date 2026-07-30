@@ -1,903 +1,131 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="羽曳野市・藤井寺市・松原市を中心に、買い物代行、病院付き添い、スマホ相談、暮らしのお手伝いを行う地域密着サービスです。" />
-  <title>はびきのコンシェルジュ｜羽曳野市の暮らしの相談窓口</title>
-  <style>
-    :root {
-      --primary: #2f7d62;
-      --primary-dark: #245f4b;
-      --accent: #f2a65a;
-      --bg: #f8fbf9;
-      --card: #ffffff;
-      --text: #24312b;
-      --muted: #68766f;
-      --line: #dce8e1;
-      --shadow: 0 14px 40px rgba(31, 78, 61, 0.1);
-      --radius: 22px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Yu Gothic", "YuGothic", "Noto Sans JP", sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      line-height: 1.75;
-    }
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-    .container { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(255,255,255,.94);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(220,232,225,.9);
-    }
-    .nav {
-      min-height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      letter-spacing: .02em;
-    }
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--primary), #56a783);
-      color: #fff;
-      box-shadow: 0 8px 18px rgba(47,125,98,.25);
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      font-size: 14px;
-      font-weight: 700;
-    }
-    .nav-cta {
-      padding: 11px 18px;
-      border-radius: 999px;
-      color: #fff;
-      background: var(--primary);
-    }
-
-    .hero {
-      padding: 86px 0 66px;
-      background:
-        radial-gradient(circle at 90% 10%, rgba(242,166,90,.22), transparent 28%),
-        radial-gradient(circle at 10% 10%, rgba(47,125,98,.12), transparent 24%),
-        linear-gradient(180deg, #ffffff, #f5faf7);
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 54px;
-      align-items: center;
-    }
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: #fff;
-      color: var(--primary-dark);
-      font-size: 13px;
-      font-weight: 800;
-    }
-    h1 {
-      font-size: clamp(38px, 6vw, 70px);
-      line-height: 1.15;
-      margin: 22px 0 18px;
-      letter-spacing: -.04em;
-    }
-    h1 span { color: var(--primary); }
-    .hero p {
-      font-size: clamp(17px, 2.2vw, 21px);
-      color: var(--muted);
-      max-width: 720px;
-      margin: 0 0 28px;
-    }
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 52px;
-      padding: 0 22px;
-      border-radius: 999px;
-      font-weight: 800;
-      border: 1px solid transparent;
-      transition: .2s ease;
-    }
-    .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 10px 24px rgba(47,125,98,.22); }
-    .btn-primary:hover { transform: translateY(-2px); background: var(--primary-dark); }
-    .btn-secondary { background: #fff; border-color: var(--line); }
-    .hero-photo {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-      border-radius: 24px;
-    }
-    .hero-caption {
-      margin-top: 18px;
-      padding: 18px 20px;
-      border-radius: 18px;
-      background: #f3faf6;
-      border: 1px solid var(--line);
-    }
-    .hero-caption strong { display:block; font-size:20px; margin-bottom:4px; }
-    .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:24px; }
-    .stat { background:#fff; border:1px solid var(--line); border-radius:18px; padding:20px; text-align:center; }
-    .stat b { display:block; font-size:27px; color:var(--primary-dark); }
-    .hero-card {
-      position: relative;
-      background: #fff;
-      border-radius: 32px;
-      padding: 28px;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(220,232,225,.9);
-    }
-    .hero-visual {
-      min-height: 430px;
-      border-radius: 24px;
-      padding: 34px;
-      color: #fff;
-      background:
-        linear-gradient(140deg, rgba(36,95,75,.96), rgba(73,151,115,.88)),
-        linear-gradient(45deg, #2f7d62, #71b993);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      overflow: hidden;
-      position: relative;
-    }
-    .hero-visual::after {
-      content: "";
-      position: absolute;
-      inset: auto -70px -90px auto;
-      width: 260px;
-      height: 260px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.1);
-    }
-    .hero-visual .big-icon { font-size: 72px; }
-    .hero-visual h2 { font-size: 30px; line-height: 1.35; margin: 0; }
-    .hero-note {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 20px;
-    }
-    .hero-note div {
-      padding: 13px 10px;
-      text-align: center;
-      background: rgba(255,255,255,.13);
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 14px;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    section { padding: 84px 0; }
-    .section-head { text-align: center; margin-bottom: 40px; }
-    .section-head h2 { font-size: clamp(30px, 4vw, 46px); margin: 8px 0 12px; letter-spacing: -.03em; }
-    .section-head p { color: var(--muted); margin: 0 auto; max-width: 720px; }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 26px;
-      box-shadow: 0 8px 24px rgba(31,78,61,.05);
-    }
-    .card-icon {
-      width: 52px;
-      height: 52px;
-      display: grid;
-      place-items: center;
-      border-radius: 16px;
-      font-size: 25px;
-      background: #edf7f1;
-      margin-bottom: 16px;
-    }
-    .card h3 { margin: 0 0 9px; font-size: 21px; }
-    .card p { color: var(--muted); margin: 0; }
-
-    .split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
-    }
-    .feature-box {
-      border-radius: 28px;
-      background: #fff;
-      border: 1px solid var(--line);
-      padding: 32px;
-      box-shadow: var(--shadow);
-    }
-    .checks { display: grid; gap: 13px; margin-top: 24px; }
-    .check { display: flex; align-items: flex-start; gap: 12px; }
-    .check-mark {
-      flex: 0 0 28px;
-      width: 28px;
-      height: 28px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: #e9f6ef;
-      color: var(--primary-dark);
-      font-weight: 900;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .price-card { position: relative; }
-    .price {
-      font-size: 34px;
-      font-weight: 900;
-      margin: 10px 0;
-      color: var(--primary-dark);
-    }
-    .price small { font-size: 14px; color: var(--muted); font-weight: 600; }
-    .badge {
-      display: inline-block;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: #fff3e5;
-      color: #a35a18;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
-    .step { text-align: center; }
-    .step-num {
-      margin: 0 auto 14px;
-      width: 48px;
-      height: 48px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      color: #fff;
-      background: var(--primary);
-      font-weight: 900;
-    }
-    .step h3 { margin: 0 0 6px; font-size: 17px; }
-    .step p { color: var(--muted); font-size: 14px; margin: 0; }
-
-    .faq { max-width: 820px; margin: 0 auto; display: grid; gap: 12px; }
-    details {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 18px 20px;
-    }
-    summary { cursor: pointer; font-weight: 800; }
-    details p { color: var(--muted); margin: 12px 0 0; }
-
-    .contact-box {
-      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-      color: #fff;
-      border-radius: 32px;
-      padding: 46px;
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 32px;
-      align-items: center;
-      box-shadow: var(--shadow);
-    }
-    .contact-box h2 { font-size: clamp(30px, 4vw, 48px); margin: 0 0 12px; }
-    .contact-actions { display: grid; gap: 12px; }
-    .contact-actions a {
-      background: #fff;
-      color: var(--primary-dark);
-      border-radius: 16px;
-      padding: 15px 18px;
-      font-weight: 900;
-      text-align: center;
-    }
-    .contact-layout {
-      display: grid;
-      grid-template-columns: .82fr 1.18fr;
-      gap: 24px;
-      align-items: stretch;
-    }
-    .contact-panel {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 30px;
-      box-shadow: var(--shadow);
-    }
-    .contact-panel h3 { margin: 0 0 8px; font-size: 25px; }
-    .contact-panel > p { margin: 0 0 22px; color: var(--muted); }
-    .line-card {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      color: #fff;
-      background: linear-gradient(145deg, #06c755, #00a845);
-      border: 0;
-    }
-    .line-card > p { color: rgba(255,255,255,.88); }
-    .line-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 56px;
-      padding: 0 20px;
-      border-radius: 16px;
-      background: #fff;
-      color: #078d3f;
-      font-weight: 900;
-      margin-top: 18px;
-    }
-    .line-steps { display: grid; gap: 10px; margin: 24px 0 0; }
-    .line-step { display: flex; gap: 10px; align-items: flex-start; }
-    .line-step span {
-      flex: 0 0 26px;
-      height: 26px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: rgba(255,255,255,.18);
-      font-weight: 900;
-    }
-    .contact-form { display: grid; gap: 16px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .form-group { display: grid; gap: 7px; }
-    .form-group label { font-weight: 800; font-size: 14px; }
-    .required { color: #c23b31; font-size: 12px; margin-left: 4px; }
-    input, select, textarea {
-      width: 100%;
-      padding: 13px 14px;
-      border: 1px solid #cfdcd5;
-      border-radius: 12px;
-      background: #fff;
-      color: var(--text);
-      font: inherit;
-    }
-    input:focus, select:focus, textarea:focus {
-      outline: 3px solid rgba(47,125,98,.14);
-      border-color: var(--primary);
-    }
-    textarea { min-height: 150px; resize: vertical; }
-    .consent { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; color: var(--muted); }
-    .consent input { width: auto; margin-top: 5px; }
-    .submit-button {
-      min-height: 56px;
-      border: 0;
-      border-radius: 15px;
-      background: var(--primary);
-      color: #fff;
-      font: inherit;
-      font-weight: 900;
-      cursor: pointer;
-      box-shadow: 0 10px 24px rgba(47,125,98,.2);
-    }
-    .submit-button:hover { background: var(--primary-dark); }
-    .form-note { margin: 0; color: var(--muted); font-size: 12px; }
-
-    .notice {
-      margin-top: 20px;
-      padding: 15px 18px;
-      border-radius: 14px;
-      background: #fff7ed;
-      color: #8a4d18;
-      font-size: 14px;
-      border: 1px solid #f7dfc2;
-    }
-
-
-    .info-table { width:100%; border-collapse: collapse; background:#fff; border-radius:18px; overflow:hidden; border:1px solid var(--line); }
-    .info-table th, .info-table td { padding:16px 18px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
-    .info-table th { width:28%; background:#f3f8f5; font-weight:800; }
-    .info-table tr:last-child th, .info-table tr:last-child td { border-bottom:0; }
-    .legal-wrap { display:grid; gap:18px; max-width:920px; margin:0 auto; }
-    .legal-card { background:#fff; border:1px solid var(--line); border-radius:20px; padding:26px; }
-    .legal-card h3 { margin:0 0 10px; font-size:21px; }
-    .legal-card p, .legal-card li { color:var(--muted); }
-    .legal-card ol, .legal-card ul { margin:10px 0 0; padding-left:1.3em; }
-    .legal-note { padding:14px 16px; border-radius:14px; background:#fff7ed; border:1px solid #f7dfc2; color:#8a4d18; }
-    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-    .link-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
-    .link-card { background:#fff; border:1px solid var(--line); border-radius:22px; padding:26px; display:flex; flex-direction:column; gap:12px; }
-    .link-card .btn { align-self:flex-start; }
-    .footer-links { margin:18px 0 10px; display:flex; flex-wrap:wrap; justify-content:center; gap:14px 18px; }
-    .footer-links a { text-decoration:underline; text-underline-offset:3px; }
-    @media (max-width: 760px) { .two-col, .link-cards { grid-template-columns:1fr; } .info-table th, .info-table td { display:block; width:100%; } .info-table th { padding-bottom:6px; } .info-table td { padding-top:6px; } }
-
-    footer {
-      padding: 30px 0 96px;
-      color: var(--muted);
-      font-size: 14px;
-      text-align: center;
-    }
-
-    .mobile-fixed {
-      display: none;
-    }
-
-    @media (max-width: 900px) {
-      .nav-links a:not(.nav-cta) { display: none; }
-      .hero-grid, .split, .contact-box, .contact-layout { grid-template-columns: 1fr; }
-      .services-grid, .pricing-grid { grid-template-columns: repeat(2, 1fr); }
-      .steps { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 640px) {
-      .container { width: min(100% - 22px, 1120px); }
-      .nav { min-height: 64px; }
-      .brand { font-size: 14px; }
-      .brand-mark { width: 38px; height: 38px; }
-      .hero { padding: 54px 0 38px; }
-      .hero-card { padding: 12px; border-radius: 22px; }
-      .hero-visual { min-height: 340px; padding: 24px; border-radius: 18px; }
-      .hero-visual h2 { font-size: 25px; }
-      .hero-note { grid-template-columns: 1fr; }
-      section { padding: 64px 0; }
-      .services-grid, .pricing-grid, .steps { grid-template-columns: 1fr; }
-      .card, .feature-box { padding: 22px; }
-      .contact-box { padding: 28px 22px; border-radius: 24px; }
-      .contact-panel { padding: 23px 18px; border-radius: 22px; }
-      .form-row { grid-template-columns: 1fr; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .mobile-fixed {
-        position: fixed;
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
-        z-index: 60;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-        padding: 8px;
-        border-radius: 18px;
-        background: rgba(255,255,255,.95);
-        backdrop-filter: blur(12px);
-        box-shadow: 0 12px 30px rgba(0,0,0,.15);
-        border: 1px solid var(--line);
-      }
-      .mobile-fixed a {
-        padding: 12px 10px;
-        text-align: center;
-        border-radius: 12px;
-        font-weight: 900;
-      }
-      .mobile-fixed .call { background: #eef7f2; color: var(--primary-dark); }
-      .mobile-fixed .line { background: var(--primary); color: #fff; }
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="羽曳野市の暮らしの相談窓口。買い物代行、病院付き添い、定期訪問、スマホ相談、専門家・事業者のご紹介まで対応します。">
+  <title>はびきのコンシェルジュ｜羽曳野市の暮らし相談窓口</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <a class="brand" href="#top" aria-label="トップへ戻る">
-        <span class="brand-mark">暮</span>
-        <span>はびきのコンシェルジュ</span>
-      </a>
-      <nav class="nav-links" aria-label="メインナビゲーション">
-        <a href="#services">サービス</a>
-        <a href="#pricing">料金</a>
-        <a href="#flow">ご利用の流れ</a>
-        <a href="#faq">よくある質問</a>
-        <a href="#company">会社概要</a>
-        <a class="nav-cta" href="#contact">無料相談</a>
-      </nav>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#top" aria-label="トップへ">
+      <span class="brand-mark">♡</span>
+      <span><strong>はびきのコンシェルジュ</strong><small>羽曳野市の暮らしの頼れる相談窓口</small></span>
+    </a>
+    <nav class="desktop-nav" aria-label="メインメニュー">
+      <a href="#services">サービス</a><a href="#prices">料金の目安</a><a href="#flow">ご利用の流れ</a><a href="#faq">よくある質問</a><a href="#company">会社概要</a>
+    </nav>
+    <div class="header-actions">
+      <a class="button line small" href="#contact">LINEで相談する</a>
+      <a class="button orange small" href="#contact">お問い合わせ</a>
     </div>
-  </header>
-
-  <main id="top">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <span class="eyebrow">羽曳野市で暮らしのお困りごとなら</span>
-          <h1><span>困ったら、</span><br>まず相談。</h1>
-          <p>買い物代行、病院付き添い、定期訪問、スマホ相談から、信頼できる専門家・事業者のご紹介まで。地域の「どこに相談したらいい？」を一緒に整理します。</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary js-line-link" href="#" target="_blank" rel="noopener">LINEで無料相談</a>
-            <a class="btn btn-secondary" href="#contact">お問い合わせフォーム</a>
-          </div>
-          <div class="stats-grid">
-            <div class="stat"><b>13年以上</b><span>営業経験</span></div>
-            <div class="stat"><b>BtoB</b><span>法人営業</span></div>
-            <div class="stat"><b>BtoC</b><span>個人営業</span></div>
-            <div class="stat"><b>地域密着</b><span>羽曳野中心</span></div>
-          </div>
-          <div class="notice">※有償送迎、医療・介護行為、専門資格を要する業務は、法令に従い対応または適切な事業者をご案内します。</div>
-        </div>
-
-        <div class="hero-card">
-          <img class="hero-photo" src="representative-family-blurred.jpg" alt="はびきのコンシェルジュ代表 中島達哉" />
-          <div class="hero-caption">
-            <strong>代表　中島 達哉</strong>
-            <span>法人・個人のお客様に向けた課題解決型営業の経験を活かし、相談しやすく、分かりやすいご案内を大切にしています。</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="services">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">SERVICE</span>
-          <h2>暮らしの小さな困りごとに</h2>
-          <p>ひとつだけでも、まとめてでも大丈夫です。内容を確認し、できること・できないことを事前に分かりやすくお伝えします。</p>
-        </div>
-        <div class="services-grid">
-          <article class="card"><div class="card-icon">🛒</div><h3>買い物代行</h3><p>スーパー、ドラッグストア、ホームセンターなどで、食料品や日用品の買い物を代行します。</p></article>
-          <article class="card"><div class="card-icon">🏥</div><h3>病院付き添い</h3><p>受付、院内での付き添い、会計、薬の受け取りなど、ご家族に代わってサポートします。</p></article>
-          <article class="card"><div class="card-icon">🧰</div><h3>暮らしのお手伝い</h3><p>電球交換、家具組立、ゴミ出し、荷物受け取り、簡単な片付けなどに対応します。</p></article>
-          <article class="card"><div class="card-icon">🌿</div><h3>庭・屋外作業</h3><p>草むしり、簡単な清掃、植木鉢の移動など、ちょっとした屋外作業をお手伝いします。</p></article>
-          <article class="card"><div class="card-icon">📱</div><h3>スマホ相談</h3><p>LINE、写真送信、アプリ設定、オンライン予約など、スマホの困りごとを丁寧にサポートします。</p></article>
-          <article class="card"><div class="card-icon">👶</div><h3>子育て家庭サポート</h3><p>ベビー用品の買い物、家事のお手伝い、必要なサービスの手配など、忙しいご家庭を支えます。</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section style="background:#eef7f2;">
-      <div class="container split">
-        <div>
-          <span class="eyebrow">ABOUT</span>
-          <h2 style="font-size:clamp(30px,4vw,46px);margin:14px 0;">便利屋ではなく、<br>地域の相談窓口へ。</h2>
-          <p style="color:var(--muted);">自分たちだけで無理に抱え込まず、専門業者や地域事業者につなぐことも含めて、暮らしの困りごとを整理する窓口を目指します。</p>
-        </div>
-        <div class="feature-box">
-          <div class="checks">
-            <div class="check"><span class="check-mark">✓</span><div><strong>事前に料金をご案内</strong><br><span style="color:var(--muted);">追加料金が発生する場合も先にご説明します。</span></div></div>
-            <div class="check"><span class="check-mark">✓</span><div><strong>地域密着で柔軟に対応</strong><br><span style="color:var(--muted);">羽曳野市を中心に、近隣地域も相談可能です。</span></div></div>
-            <div class="check"><span class="check-mark">✓</span><div><strong>専門外は提携先をご案内</strong><br><span style="color:var(--muted);">資格や許可が必要な作業は、適切な事業者につなぎます。</span></div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="pricing">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">PRICE</span>
-          <h2>料金の目安</h2>
-          <p>内容・距離・作業時間によって変わります。正式な金額は事前にお見積りします。</p>
-        </div>
-        <div class="pricing-grid">
-          <div class="card price-card"><span class="badge">単発</span><h3>買い物代行</h3><div class="price">2,000円〜 <small>＋商品代</small></div><p>近隣店舗での食料品・日用品の買い物を代行します。</p></div>
-          <div class="card price-card"><h3>病院付き添い・生活支援</h3><div class="price">3,000円〜 <small>/ 60分</small></div><p>院内付き添い、家具組立、片付け、スマホ相談など。</p></div>
-          <div class="card price-card"><span class="badge">定期</span><h3>月2回プラン</h3><div class="price">4,980円 <small>/ 月</small></div><p>1回30分。安否確認、お話し相手、軽作業、ご家族への簡易報告。</p></div>
-          <div class="card price-card"><h3>月4回プラン</h3><div class="price">8,980円 <small>/ 月</small></div><p>週1回の見守りを目安に、日常の小さなお困りごとを継続支援。</p></div>
-          <div class="card price-card"><h3>見守りプラン</h3><div class="price">16,800円 <small>/ 月8回</small></div><p>定期的な安否確認と、ご希望に応じたご家族への状況報告。</p></div>
-          <div class="card price-card"><h3>専門家・事業者の紹介</h3><div class="price">相談無料 <small>※条件は事前案内</small></div><p>リフォーム、介護、不動産、相続など、適切な相談先をご案内します。</p></div>
-        </div>
-        <div class="notice" style="max-width:860px;margin:22px auto 0;">出張費・駐車料金・商品代・処分費などが必要な場合は、必ず事前にご案内します。</div>
-      </div>
-    </section>
-
-    <section id="flow" style="background:#fff;">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">FLOW</span>
-          <h2>ご利用の流れ</h2>
-        </div>
-        <div class="steps">
-          <div class="step"><div class="step-num">1</div><h3>お問い合わせ</h3><p>電話・LINE・フォームからご連絡ください。</p></div>
-          <div class="step"><div class="step-num">2</div><h3>内容確認</h3><p>お困りごと、場所、希望日時を伺います。</p></div>
-          <div class="step"><div class="step-num">3</div><h3>お見積り</h3><p>料金と対応内容をご案内します。</p></div>
-          <div class="step"><div class="step-num">4</div><h3>サービス実施</h3><p>約束した内容に沿って対応します。</p></div>
-          <div class="step"><div class="step-num">5</div><h3>お支払い</h3><p>現金・振込など、対応方法をご案内します。</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="area">
-      <div class="container split">
-        <div class="feature-box">
-          <span class="eyebrow">AREA</span>
-          <h2 style="margin:14px 0 8px;font-size:34px;">対応エリア</h2>
-          <p style="color:var(--muted);">羽曳野市を中心に、藤井寺市・松原市・富田林市・柏原市など。その他の地域も内容によりご相談ください。</p>
-        </div>
-        <div>
-          <h2 style="font-size:34px;margin:0 0 10px;">こんな方におすすめ</h2>
-          <div class="checks">
-            <div class="check"><span class="check-mark">✓</span><div>親が高齢になり、少し心配になってきた</div></div>
-            <div class="check"><span class="check-mark">✓</span><div>子育てや仕事で買い物の時間が取れない</div></div>
-            <div class="check"><span class="check-mark">✓</span><div>家族が遠方に住んでいて頼みにくい</div></div>
-            <div class="check"><span class="check-mark">✓</span><div>小さな作業を誰に頼めばいいか分からない</div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="faq" style="background:#eef7f2;">
-      <div class="container">
-        <div class="section-head"><span class="eyebrow">FAQ</span><h2>よくある質問</h2></div>
-        <div class="faq">
-          <details><summary>当日の依頼にも対応できますか？</summary><p>予定に空きがある場合は対応可能です。まずはお電話かLINEでご相談ください。</p></details>
-          <details><summary>見積りだけでも大丈夫ですか？</summary><p>大丈夫です。内容を確認し、料金の目安をご案内します。</p></details>
-          <details><summary>送迎もお願いできますか？</summary><p>有償送迎には法令上の制限があります。現在は買い物代行や付き添い、必要な移動サービスの手配を中心にご相談ください。</p></details>
-          <details><summary>どんな依頼でも頼めますか？</summary><p>資格・許可が必要な作業、危険作業、医療・介護行為などは対応できない場合があります。その場合は適切な事業者をご案内します。</p></details>
-        </div>
-      </div>
-    </section>
-
-    <section id="company" style="background:#fff;">
-      <div class="container">
-        <div class="section-head"><span class="eyebrow">COMPANY</span><h2>会社概要・代表挨拶</h2><p>顔の見える地域の相談窓口として、誠実で分かりやすい運営を大切にします。</p></div>
-        <div class="two-col">
-          <div class="feature-box">
-            <h3 style="font-size:26px;margin-top:0;">代表挨拶</h3>
-            <p>はじめまして。はびきのコンシェルジュ代表の中島達哉です。</p>
-            <p>私は営業経験13年以上で、法人営業（BtoB）と個人のお客様への営業・相談対応（BtoC）の両方に携わってきました。多数の法人・個人のお客様を担当し、相手のお話を丁寧に伺い、課題を整理して最適な解決策につなげる「課題解決型営業」を大切にしてきました。</p>
-            <p>羽曳野市で暮らし、子育てをする中で、「少し困っているけれど、どこへ相談すればいいか分からない」という場面が多いことに気づきました。生活の小さなお困りごとから専門家が必要な相談まで、まず話を聞き、安心できる解決方法へつなぐ地域の窓口を目指します。</p>
-            <div class="checks">
-              <div class="check"><span class="check-mark">✓</span><div><strong>営業経験13年以上</strong></div></div>
-              <div class="check"><span class="check-mark">✓</span><div><strong>多数の法人・個人のお客様を担当</strong></div></div>
-              <div class="check"><span class="check-mark">✓</span><div><strong>課題解決型営業に従事</strong></div></div>
-            </div>
-            <p><strong>代表　中島 達哉</strong></p>
-          </div>
-          <div>
-            <table class="info-table">
-              <tr><th>屋号</th><td>はびきのコンシェルジュ</td></tr>
-              <tr><th>運営者</th><td>中島 達哉</td></tr>
-              <tr><th>所在地</th><td>大阪府羽曳野市<br><small>※公開前に事業用住所を記載してください。</small></td></tr>
-              <tr><th>電話番号</th><td>公開前に記載</td></tr>
-              <tr><th>受付時間</th><td>平日・土日 9:00〜18:00（予定）</td></tr>
-              <tr><th>事業内容</th><td>暮らし相談、生活支援、買い物代行、病院付き添い、スマホ相談、地域事業者の紹介・手配</td></tr>
-              <tr><th>対応地域</th><td>羽曳野市を中心に藤井寺市、松原市、富田林市、柏原市ほか</td></tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="scope">
-      <div class="container">
-        <div class="section-head"><span class="eyebrow">SCOPE</span><h2>できること・できないこと</h2></div>
-        <div class="two-col">
-          <div class="card"><div class="card-icon">○</div><h3>お手伝いできること</h3><ul><li>買い物・日用品購入の代行</li><li>病院内の付き添い、受付・会計の補助</li><li>電球交換、簡単な家具組立、片付け</li><li>スマホ・LINE・ネット予約の操作支援</li><li>家事支援、見守り、地域サービスの情報提供</li><li>資格・許可を持つ提携事業者の紹介</li></ul></div>
-          <div class="card"><div class="card-icon">×</div><h3>お受けできないこと</h3><ul><li>医療行為、身体介護など資格を要する行為</li><li>無許可の有償送迎、旅客運送</li><li>高所・重量物・電気工事など危険性の高い作業</li><li>法律・税務・登記など専門資格が必要な判断や代理</li><li>現金・通帳・暗証番号の預かりや管理</li><li>違法、公序良俗に反する依頼</li></ul></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="partners" style="background:#eef7f2;">
-      <div class="container">
-        <div class="section-head"><span class="eyebrow">PARTNER / RECRUIT</span><h2>提携パートナー・登録スタッフ募集</h2><p>相談を抱え込まず、地域の力で解決するネットワークをつくります。</p></div>
-        <div class="link-cards">
-          <article class="link-card"><div class="card-icon">🤝</div><h3>提携パートナー募集</h3><p>工務店、清掃、リフォーム、不動産、介護、士業、子育て支援、習い事など、羽曳野周辺で誠実に事業を行う方を募集します。</p><ul><li>紹介条件・責任範囲を事前に書面化</li><li>利用者への料金と紹介関係を明確化</li><li>資格・許認可・保険加入状況を確認</li></ul><a class="btn btn-primary" href="#contact">提携について相談する</a></article>
-          <article class="link-card"><div class="card-icon">👥</div><h3>登録スタッフ募集</h3><p>買い物代行、付き添い、軽作業、スマホ相談などを担当する地域スタッフを募集予定です。仕事がある時に相談する登録制から始めます。</p><ul><li>本人確認、面談、研修を実施</li><li>報酬・交通費・業務範囲を事前提示</li><li>雇用か業務委託かを実態に合わせて決定</li></ul><a class="btn btn-primary" href="#contact">スタッフ登録を相談する</a></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="terms" style="background:#fff;">
-      <div class="container">
-        <div class="section-head"><span class="eyebrow">TERMS</span><h2>利用規約</h2><p>最終更新日：2026年7月30日</p></div>
-        <div class="legal-wrap">
-          <div class="legal-card"><h3>第1条（適用）</h3><p>本規約は、はびきのコンシェルジュ（以下「当サービス」）が提供する相談、生活支援、事業者紹介その他のサービスの利用条件を定めるものです。利用者は本規約に同意のうえ、本サービスを利用するものとします。</p></div>
-          <div class="legal-card"><h3>第2条（サービス内容）</h3><p>当サービスは、利用者から相談内容を伺い、自ら生活支援を行うほか、必要に応じて外部の事業者・専門家を案内または紹介します。相談内容によっては対応をお断りすることがあります。</p></div>
-          <div class="legal-card"><h3>第3条（申込み・契約成立）</h3><p>問い合わせのみでは契約は成立しません。当サービスが対応内容、料金、日時その他の条件を提示し、利用者が承諾した時点で契約が成立します。</p></div>
-          <div class="legal-card"><h3>第4条（料金・実費）</h3><p>利用料金は事前に提示する見積りまたは料金案内によります。商品代、交通費、駐車料金、処分費その他の実費が必要な場合は、原則として事前に案内します。</p></div>
-          <div class="legal-card"><h3>第5条（キャンセル）</h3><p>利用日前日までのキャンセルは原則無料、当日は予定料金の50％、無断キャンセルは100％を申し受ける場合があります。ただし、個別見積りや外部事業者の条件がある場合は、その条件を優先します。</p></div>
-          <div class="legal-card"><h3>第6条（外部事業者の紹介）</h3><p>紹介先が提供するサービスについては、原則として利用者と紹介先との間で直接契約が成立します。当サービスは紹介先の選定に配慮しますが、紹介先のサービス内容、履行、損害等を保証するものではありません。紹介料・広告料等を受領する場合があります。</p></div>
-          <div class="legal-card"><h3>第7条（禁止事項）</h3><ul><li>法令または公序良俗に反する依頼</li><li>虚偽情報の提供、第三者へのなりすまし</li><li>スタッフや提携先への暴言、威圧、ハラスメント</li><li>サービス運営を妨害する行為</li><li>その他、当サービスが不適切と判断する行為</li></ul></div>
-          <div class="legal-card"><h3>第8条（免責・責任範囲）</h3><p>天災、交通事情、感染症、通信障害その他やむを得ない事情により、遅延・変更・中止となる場合があります。当サービスの故意または重大な過失による場合を除き、責任は通常かつ直接の損害の範囲に限られるものとします。</p></div>
-          <div class="legal-card"><h3>第9条（個人情報）</h3><p>個人情報は、別途定めるプライバシーポリシーに従って取り扱います。</p></div>
-          <div class="legal-card"><h3>第10条（規約変更・準拠法）</h3><p>必要に応じて本規約を変更することがあります。日本法を準拠法とし、紛争が生じた場合は、法令に定める管轄裁判所を第一審の管轄裁判所とします。</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="privacy">
-      <div class="container">
-        <div class="section-head"><span class="eyebrow">PRIVACY</span><h2>プライバシーポリシー</h2></div>
-        <div class="legal-wrap">
-          <div class="legal-card"><h3>1. 取得する情報</h3><p>氏名、住所・地域、電話番号、メールアドレス、相談内容、希望日時、サービス提供に必要な情報、ウェブサイトの利用情報等を取得する場合があります。</p></div>
-          <div class="legal-card"><h3>2. 利用目的</h3><ul><li>問い合わせ対応、本人確認、見積り、契約、サービス提供</li><li>日程調整、料金請求、アフター対応</li><li>利用者の同意に基づく提携事業者への情報提供</li><li>サービス改善、不正利用防止、法令対応</li><li>案内配信（同意を得た場合に限る）</li></ul></div>
-          <div class="legal-card"><h3>3. 第三者提供</h3><p>法令に基づく場合を除き、本人の同意なく個人データを第三者へ提供しません。提携事業者への相談・見積り依頼に必要な情報を共有する場合は、原則として事前に説明し、同意を得ます。</p></div>
-          <div class="legal-card"><h3>4. 安全管理・委託</h3><p>個人情報への不正アクセス、紛失、漏えい等を防ぐため、合理的な安全管理措置を講じます。フォームやクラウドサービス等を利用する場合は、提供事業者の安全性を確認し、必要な範囲で取り扱いを委託します。</p></div>
-          <div class="legal-card"><h3>5. 開示等の請求・お問い合わせ</h3><p>本人から、保有個人データの開示、訂正、利用停止等の請求があった場合は、本人確認のうえ法令に従って対応します。問い合わせ先は会社概要記載の連絡先です。</p></div>
-          <div class="legal-card"><h3>6. 改定</h3><p>法令やサービス内容の変更に応じて、本ポリシーを改定することがあります。重要な変更はウェブサイト上で案内します。</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="commercial" style="background:#eef7f2;">
-      <div class="container">
-        <div class="section-head"><span class="eyebrow">LEGAL NOTICE</span><h2>特定商取引法に基づく表記</h2></div>
-        <table class="info-table" style="max-width:920px;margin:0 auto;">
-          <tr><th>販売事業者</th><td>中島 達哉（法人設立後は正式な法人名へ変更）</td></tr>
-          <tr><th>運営統括責任者</th><td>中島 達哉</td></tr>
-          <tr><th>所在地</th><td>公開前に、番地まで含む事業用住所を記載してください。</td></tr>
-          <tr><th>電話番号</th><td>公開前に記載してください。</td></tr>
-          <tr><th>メールアドレス</th><td>公開前に記載してください。</td></tr>
-          <tr><th>販売価格</th><td>各サービスページ、見積書または申込み前の案内に表示します。</td></tr>
-          <tr><th>商品代金以外の費用</th><td>交通費、駐車料金、商品代、材料費、処分費、振込手数料等。必要な場合は事前に案内します。</td></tr>
-          <tr><th>支払方法・時期</th><td>現金、銀行振込その他個別に案内する方法。原則としてサービス実施後または請求書記載の期日まで。</td></tr>
-          <tr><th>サービス提供時期</th><td>申込み時に合意した日時に提供します。</td></tr>
-          <tr><th>キャンセル・返金</th><td>利用規約のキャンセル条項に従います。サービスの性質上、提供完了後の利用者都合による返金は原則として行いません。</td></tr>
-        </table>
-        <div class="legal-note" style="max-width:920px;margin:18px auto 0;">この欄は、ネット上で申込みや契約を受け付ける場合を想定したひな形です。住所・電話番号・正式な事業者名などを確定してから公開し、事業形態に応じて専門家へ確認してください。</div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">CONTACT</span>
-          <h2>無料相談・お問い合わせ</h2>
-          <p>まだ依頼するか決まっていなくても大丈夫です。相談内容を確認後、原則1営業日以内にご連絡します。</p>
-        </div>
-
-        <div class="contact-layout">
-          <aside class="contact-panel line-card">
-            <div>
-              <div style="font-size:48px;line-height:1;">💬</div>
-              <h3 style="margin-top:18px;">LINEでかんたん相談</h3>
-              <p>写真を送って相談したい方や、フォーム入力が面倒な方におすすめです。</p>
-              <div class="line-steps">
-                <div class="line-step"><span>1</span><div>友だち追加</div></div>
-                <div class="line-step"><span>2</span><div>お名前と相談内容を送信</div></div>
-                <div class="line-step"><span>3</span><div>担当者から返信</div></div>
-              </div>
-            </div>
-            <a class="line-button js-line-link" href="#" target="_blank" rel="noopener">LINEで無料相談する</a>
-          </aside>
-
-          <div class="contact-panel">
-            <h3>お問い合わせフォーム</h3>
-            <p>必要事項をご入力ください。営業・勧誘目的の送信はご遠慮ください。</p>
-            <form class="contact-form" id="contactForm" action="https://formsubmit.co/info@example.com" method="POST">
-              <input type="hidden" name="_subject" value="【はびきのコンシェルジュ】お問い合わせ">
-              <input type="hidden" name="_captcha" value="false">
-              <input type="hidden" name="_template" value="table">
-              <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="name">お名前<span class="required">必須</span></label>
-                  <input id="name" name="お名前" type="text" autocomplete="name" required>
-                </div>
-                <div class="form-group">
-                  <label for="area">お住まいの地域</label>
-                  <input id="area" name="お住まいの地域" type="text" placeholder="例：羽曳野市古市">
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="phone">電話番号</label>
-                  <input id="phone" name="電話番号" type="tel" autocomplete="tel" inputmode="tel">
-                </div>
-                <div class="form-group">
-                  <label for="email">メールアドレス<span class="required">必須</span></label>
-                  <input id="email" name="email" type="email" autocomplete="email" required>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="category">ご相談内容<span class="required">必須</span></label>
-                  <select id="category" name="ご相談内容" required>
-                    <option value="">選択してください</option>
-                    <option>買い物代行</option>
-                    <option>病院付き添い</option>
-                    <option>暮らしのお手伝い</option>
-                    <option>スマホ相談</option>
-                    <option>子育て家庭サポート</option>
-                    <option>専門事業者の紹介</option>
-                    <option>その他・まだ分からない</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="contactMethod">希望する連絡方法</label>
-                  <select id="contactMethod" name="希望する連絡方法">
-                    <option>メール</option>
-                    <option>電話</option>
-                    <option>どちらでも可</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="preferred">希望日時</label>
-                <input id="preferred" name="希望日時" type="text" placeholder="例：平日18時以降、8月3日午前など">
-              </div>
-
-              <div class="form-group">
-                <label for="message">詳しい相談内容<span class="required">必須</span></label>
-                <textarea id="message" name="詳しい相談内容" placeholder="困っていること、希望する対応、場所などをご記入ください。" required></textarea>
-              </div>
-
-              <label class="consent">
-                <input type="checkbox" required>
-                <span>入力した個人情報が、お問い合わせ対応のために利用されることに同意します。</span>
-              </label>
-              <button class="submit-button" type="submit">内容を送信する</button>
-              <p class="form-note">※公開前に、送信先メールアドレスとLINE公式アカウントURLを設定してください。</p>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <strong>はびきのコンシェルジュ</strong><br>
-      羽曳野市・藤井寺市・松原市周辺の暮らしをサポート
-      <div class="footer-links">
-        <a href="#company">会社概要</a><a href="#scope">対応範囲</a><a href="#partners">提携・採用</a><a href="#terms">利用規約</a><a href="#privacy">プライバシーポリシー</a><a href="#commercial">特商法表記</a>
-      </div>
-      <small>© 2026 Habikino Concierge</small>
-    </div>
-  </footer>
-
-  <div class="mobile-fixed" aria-label="スマートフォン用お問い合わせ">
-    <a class="call" href="tel:0000000000">📞 電話</a>
-    <a class="line js-line-link" href="#" target="_blank" rel="noopener">💬 LINE相談</a>
   </div>
-  <script>
-    // 公開前にこの2項目だけ変更してください。
-    const SITE_CONFIG = {
-      lineUrl: "https://lin.ee/XXXXXXXX",
-      formEmail: "info@example.com"
-    };
+</header>
 
-    document.querySelectorAll(".js-line-link").forEach((link) => {
-      link.href = SITE_CONFIG.lineUrl;
-    });
+<main id="top">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">羽曳野市で暮らしのお困りごとなら</p>
+        <h1><span>困ったら、</span><br>まず相談。</h1>
+        <p class="lead">買い物代行、病院付き添い、定期訪問、スマホ相談から、信頼できる専門家・事業者のご紹介まで。地域の「どこに相談したらいい？」を一緒に整理します。</p>
+        <div class="hero-buttons">
+          <a class="button line" href="#contact">LINEで無料相談</a>
+          <a class="button ghost" href="#contact">お問い合わせフォーム</a>
+        </div>
+        <div class="stats" aria-label="代表の経験">
+          <div><strong>13年以上</strong><span>営業経験</span></div>
+          <div><strong>BtoB</strong><span>法人営業</span></div>
+          <div><strong>BtoC</strong><span>個人営業</span></div>
+          <div><strong>地域密着</strong><span>羽曳野中心</span></div>
+        </div>
+      </div>
 
-    const contactForm = document.getElementById("contactForm");
-    if (contactForm) {
-      contactForm.action = `https://formsubmit.co/${SITE_CONFIG.formEmail}`;
-      contactForm.addEventListener("submit", (event) => {
-        if (SITE_CONFIG.formEmail === "info@example.com") {
-          event.preventDefault();
-          alert("公開前に、HTML下部のSITE_CONFIG.formEmailを実際のメールアドレスへ変更してください。");
-        }
-      });
-    }
+      <div class="hero-card">
+        <div class="photo-wrap">
+          <img src="images/representative-family-blurred.jpg" alt="はびきのコンシェルジュ代表 中島達哉">
+          <span class="local-badge">地域密着<br>羽曳野市を<br>中心に活動中！</span>
+        </div>
+        <div class="mini-actions">
+          <a class="mini line" href="#contact">LINEで相談する</a>
+          <a class="mini orange" href="#contact">お問い合わせ</a>
+          <a class="mini blue" href="tel:09091120260">電話で相談する<br><b>090-9112-0260</b></a>
+        </div>
+        <div class="profile-summary">
+          <p class="green-label">代表挨拶</p>
+          <h2>代表　中島 達哉</h2>
+          <p>営業経験13年以上。法人営業・個人営業の両方を経験し、多数のお客様の課題解決を支援してきました。その経験を活かし、地域の皆さまに寄り添った分かりやすいご案内を大切にしています。</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    document.querySelectorAll(".js-line-link").forEach((link) => {
-      link.addEventListener("click", (event) => {
-        if (SITE_CONFIG.lineUrl.includes("XXXXXXXX")) {
-          event.preventDefault();
-          alert("公開前に、HTML下部のSITE_CONFIG.lineUrlをLINE公式アカウントのURLへ変更してください。");
-        }
-      });
-    });
-  </script>
-</body>
-</html>
+  <section id="services" class="section">
+    <div class="container">
+      <p class="section-kicker">SERVICE</p><h2 class="section-title">暮らしのお困りごとを幅広くサポート</h2>
+      <div class="cards three">
+        <article class="card"><div class="icon">🛍️</div><h3>生活のお手伝い</h3><p>買い物代行、病院付き添い、家事の軽いお手伝い、スマホ相談などを承ります。</p></article>
+        <article class="card"><div class="icon">🏠</div><h3>定期訪問・見守り</h3><p>定期的な訪問や安否確認、ご家族への報告で、安心できる毎日を支えます。</p></article>
+        <article class="card"><div class="icon">🤝</div><h3>専門家・事業者の紹介</h3><p>リフォーム、介護、相続、不動産など、相談内容に合った事業者をご案内します。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="prices" class="section soft">
+    <div class="container">
+      <p class="section-kicker">PRICE</p><h2 class="section-title">料金の目安</h2>
+      <div class="price-grid">
+        <article class="price-card"><h3>単発サポート</h3><p class="price">2,000円〜</p><p>買い物代行・スマホ相談など。内容、時間、移動距離によりお見積りします。</p></article>
+        <article class="price-card featured"><span>おすすめ</span><h3>定期訪問 月2回</h3><p class="price">4,980円<small>/月</small></p><p>1回30分を目安に、見守り・安否確認・軽作業などを行います。</p></article>
+        <article class="price-card"><h3>定期訪問 月4回</h3><p class="price">8,980円<small>/月</small></p><p>週1回を目安に訪問。ご希望に応じてご家族への状況報告も行います。</p></article>
+        <article class="price-card"><h3>見守り 月8回</h3><p class="price">16,800円<small>/月</small></p><p>よりこまめな訪問をご希望の方向け。詳細は事前にご相談ください。</p></article>
+      </div>
+      <p class="note">※料金は内容・時間・距離により異なります。追加料金が発生する場合は、作業前にご説明します。</p>
+    </div>
+  </section>
+
+  <section class="section" id="profile">
+    <div class="container profile-grid">
+      <img class="profile-photo" src="images/representative-family-blurred.jpg" alt="代表 中島達哉">
+      <div><p class="section-kicker">PROFILE</p><h2 class="section-title left">地域の最初の相談相手を目指して</h2>
+        <p>私はこれまで13年以上、法人営業と個人のお客様へのご提案に携わり、課題解決型の営業に従事してきました。羽曳野市で暮らす一人として、相談先が分からず困っている方と、地域の信頼できる事業者をつなぎます。</p>
+        <ul class="check-list"><li>営業経験13年以上</li><li>法人営業・個人営業の双方を経験</li><li>多数の法人・個人のお客様を担当</li><li>相手の状況に合わせた課題解決型の提案</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="flow" class="section soft">
+    <div class="container"><p class="section-kicker">FLOW</p><h2 class="section-title">ご利用の流れ</h2>
+      <ol class="flow"><li><b>1</b><h3>ご相談</h3><p>LINE・電話・フォームからご連絡ください。</p></li><li><b>2</b><h3>ヒアリング</h3><p>ご希望や状況を丁寧にお聞きします。</p></li><li><b>3</b><h3>ご提案・お見積り</h3><p>対応方法と料金を事前にご案内します。</p></li><li><b>4</b><h3>サービス提供</h3><p>自社対応または適切な事業者をご紹介します。</p></li></ol>
+    </div>
+  </section>
+
+  <section id="company" class="section">
+    <div class="container company-grid">
+      <div><p class="section-kicker">COMPANY</p><h2 class="section-title left">会社概要</h2>
+        <dl class="company-list"><div><dt>屋号</dt><dd>はびきのコンシェルジュ</dd></div><div><dt>代表者</dt><dd>中島 達哉</dd></div><div><dt>所在地</dt><dd>大阪府羽曳野市</dd></div><div><dt>電話番号</dt><dd><a href="tel:09091120260">090-9112-0260</a></dd></div><div><dt>事業内容</dt><dd>暮らしの相談・生活支援・定期訪問・専門家および事業者の紹介</dd></div></dl>
+      </div>
+      <div class="area-card"><h3>対応エリア</h3><ul><li>羽曳野市</li><li>藤井寺市</li><li>松原市</li><li>富田林市（一部地域）</li></ul><p>その他の地域もお気軽にご相談ください。</p></div>
+    </div>
+  </section>
+
+  <section id="faq" class="section soft">
+    <div class="container narrow"><p class="section-kicker">FAQ</p><h2 class="section-title">よくある質問</h2>
+      <details><summary>相談だけでも大丈夫ですか？</summary><p>はい。まずは無料で内容をお聞きし、対応可能かをご案内します。</p></details>
+      <details><summary>当日の依頼はできますか？</summary><p>空き状況により対応可能です。お急ぎの場合は電話でお問い合わせください。</p></details>
+      <details><summary>有料での送迎はできますか？</summary><p>許可なく有償で人を運ぶ送迎は行いません。病院内での付き添いや、適法な移動手段のご案内を行います。</p></details>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <div class="container contact-box"><div><p class="section-kicker">CONTACT</p><h2>まずは気軽にご相談ください</h2><p>相談内容がまとまっていなくても大丈夫です。一緒に整理します。</p></div><div class="contact-actions"><a class="button line" href="#">LINEで相談する</a><a class="button blue" href="tel:09091120260">090-9112-0260</a><a class="button ghost" href="mailto:info@example.com">メールで問い合わせ</a></div></div>
+  </section>
+</main>
+
+<footer><div class="container footer-inner"><p><strong>はびきのコンシェルジュ</strong><br>大阪府羽曳野市</p><p><a href="#company">会社概要</a>　<a href="#faq">よくある質問</a>　<a href="#contact">お問い合わせ</a></p><small>© 2026 Habikino Concierge</small></div></footer>
+
+<div class="mobile-bar"><a href="#contact">LINE相談</a><a href="tel:09091120260">電話する</a></div>
+<script src="script.js"></script>
+</body></html>
