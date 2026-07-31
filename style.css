@@ -3,3 +3,6 @@
 /* 代表写真の表示位置調整 */
 .photo-frame img{object-position:center 18%;}
 .profile-image img{object-position:center 18%;}
+
+/* LINE official account integration */
+.line-qr-card{display:flex;align-items:center;justify-content:center;gap:28px;max-width:720px;margin:30px auto 0;padding:22px 26px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);border-radius:24px;text-align:left}.line-qr-card img{width:150px;height:150px;object-fit:contain;background:#fff;border-radius:16px;padding:8px}.line-qr-card strong{display:block;font-size:18px;margin-bottom:6px}.line-qr-card p{margin:0 0 8px;font-size:14px}.line-qr-card a{font-weight:900;color:#fff;text-decoration:underline;text-underline-offset:4px}@media(max-width:700px){.line-qr-card{flex-direction:column;text-align:center;padding:20px}.line-qr-card img{width:180px;height:180px}}
