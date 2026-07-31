@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://habikon.github.io/habikino-concierge/sitemap.xml
