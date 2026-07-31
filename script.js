@@ -1,1 +1,8 @@
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href');if(id==='#')return;const el=document.querySelector(id);if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});}}));
+const header=document.querySelector('.site-header');
+const menuButton=document.querySelector('.menu-button');
+const nav=document.querySelector('.global-nav');
+window.addEventListener('scroll',()=>header?.classList.toggle('scrolled',window.scrollY>20));
+menuButton?.addEventListener('click',()=>{const open=nav?.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(Boolean(open)));});
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+document.querySelector('#line-link')?.addEventListener('click',e=>{if(e.currentTarget.getAttribute('href')==='#'){e.preventDefault();alert('LINE公式アカウントのURLを設定すると、ここから相談できます。');}});
