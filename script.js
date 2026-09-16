@@ -19,6 +19,27 @@ menuButton?.addEventListener('click',()=>{const open=nav?.classList.toggle('open
 const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
+// GA4 conversion tracking: LINE / phone / article clicks
+// Event parameters include the page path and clicked label so traffic can be compared by page.
+document.addEventListener('click',event=>{
+  const link=event.target.closest('a');
+  if(!link || typeof window.gtag!=='function') return;
+  const href=link.getAttribute('href')||'';
+  const params={
+    link_url:link.href||href,
+    link_text:(link.textContent||'').trim().replace(/\s+/g,' ').slice(0,100),
+    page_path:location.pathname,
+    page_title:document.title
+  };
+  if(href.includes('lin.ee/')){
+    window.gtag('event','line_click',params);
+  }else if(href.startsWith('tel:')){
+    window.gtag('event','phone_click',params);
+  }else if(href.includes('articles/') || link.closest('.local-news-card')){
+    window.gtag('event','article_click',params);
+  }
+});
+
 (()=>{
   if(!document.querySelector('link[href="media.css"]')){
     const mediaCss=document.createElement('link');
