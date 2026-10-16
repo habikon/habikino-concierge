@@ -25,3 +25,9 @@
 .funeral-notice{background:#f7faf8;border:1px solid var(--line);border-radius:28px;padding:38px}
 .funeral-notice h2{margin-top:0;font-size:28px}.funeral-notice p{color:#526159}.funeral-notice small{display:block;margin-top:22px;color:var(--muted);line-height:1.8}
 @media(max-width:760px){.service-grid-four,.funeral-points,.funeral-flow{grid-template-columns:1fr}.funeral-hero{padding:70px 0 60px}.funeral-hero h1{font-size:36px}.funeral-notice{padding:25px}}
+
+/* 2026-10 新ロゴ（家・緑・太陽） */
+.brand-logo{display:block;width:52px;height:auto;flex:0 0 auto}
+.footer-brand .brand-logo{background:#fff;border-radius:14px;padding:6px;width:60px;box-sizing:border-box}
+.brand-logo-xl{display:block;width:210px;max-width:70%;height:auto;margin:0 auto}
+@media(max-width:760px){.brand-logo{width:44px}.footer-brand .brand-logo{width:52px}.brand-logo-xl{width:170px}}

@@ -51,7 +51,7 @@ document.addEventListener('click',event=>{
   if(nav && !nav.querySelector('[data-habikino-news-link]')){
     const link=document.createElement('a');
     link.href='#habikino-news';
-    link.textContent='羽曳野のこと';
+    link.textContent='地域のこと';
     link.dataset.habikinoNewsLink='true';
     const faqLink=[...nav.querySelectorAll('a')].find(a=>a.getAttribute('href')==='#faq');
     nav.insertBefore(link,faqLink||null);
@@ -63,7 +63,7 @@ document.addEventListener('click',event=>{
       const section=document.createElement('section');
       section.className='section habikino-news-section';
       section.id='habikino-news';
-      section.innerHTML=`<div class="container"><div class="section-heading reveal is-visible"><p class="section-label">HABIKINO LOCAL</p><h2>羽曳野のこと</h2><p>イベント、子育て、暮らし、行政、お店など、羽曳野の今を分かりやすくお届けします。</p></div><div class="local-news-grid" id="habikino-news-grid"><p class="local-news-loading">記事を読み込んでいます...</p></div><div class="local-news-more"><a class="button button-sub" href="articles/">記事をすべて見る →</a></div></div>`;
+      section.innerHTML=`<div class="container"><div class="section-heading reveal is-visible"><p class="section-label">LOCAL INFO</p><h2>地域のこと</h2><p>イベント、子育て、暮らし、行政、お店など、羽曳野市を中心に地元の今を分かりやすくお届けします。藤井寺市・松原市の情報も準備しています。</p></div><div class="local-news-grid" id="habikino-news-grid"><p class="local-news-loading">記事を読み込んでいます...</p></div><div class="local-news-more"><a class="button button-sub" href="articles/">記事をすべて見る →</a></div></div>`;
       target.parentNode.insertBefore(section,target);
     }
   }

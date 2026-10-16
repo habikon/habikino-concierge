@@ -1,2 +1,27 @@
 /* Habikino local media */
 .habikino-news-section{background:#fff}.local-news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.local-news-card{border:1px solid var(--line);border-radius:24px;overflow:hidden;background:#fff;box-shadow:0 12px 34px rgba(24,72,52,.07);display:flex;flex-direction:column;min-height:100%}.local-news-thumb{aspect-ratio:16/9;background:linear-gradient(135deg,#e9f6ef,#fff1df);display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--green);font-size:22px;padding:20px;text-align:center}.local-news-body{padding:22px;display:flex;flex-direction:column;gap:10px;flex:1}.local-news-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:11px;color:var(--muted)}.local-news-category{display:inline-flex;padding:4px 9px;border-radius:999px;background:#edf7f1;color:var(--green);font-weight:800}.local-news-card h3{margin:0;font-size:19px;line-height:1.5}.local-news-card p{margin:0;color:var(--muted);font-size:13px}.local-news-card a{margin-top:auto;color:var(--green);font-weight:900;font-size:13px}.local-news-more{text-align:center;margin-top:30px}.article-page{background:#f7faf8}.article-shell{width:min(920px,calc(100% - 28px));margin:0 auto;padding:56px 0 90px}.article-back{display:inline-block;margin-bottom:24px;color:var(--green);font-weight:800}.article-header{background:#fff;border:1px solid var(--line);border-radius:28px;padding:34px;box-shadow:0 12px 34px rgba(24,72,52,.06)}.article-header h1{font-size:clamp(30px,5vw,48px);line-height:1.35;margin:12px 0 18px}.article-summary{font-size:17px;color:#526159}.article-content{margin-top:24px;background:#fff;border:1px solid var(--line);border-radius:28px;padding:34px}.article-content h2{margin-top:34px;font-size:26px}.article-content h2:first-child{margin-top:0}.article-content h3{margin-top:24px}.article-content p,.article-content li{color:#435149}.article-content a{color:var(--green);text-decoration:underline;text-underline-offset:3px}.article-source-box{margin-top:34px;padding:20px;border-radius:18px;background:#f2f8f4}.article-source-box ul{margin-bottom:0}.article-disclaimer{margin-top:20px;font-size:12px;color:var(--muted)}.articles-page-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}@media(max-width:760px){.local-news-grid,.articles-page-grid{grid-template-columns:1fr}.article-header,.article-content{padding:22px;border-radius:22px}}
+
+/* 2026-10 nav：項目追加に伴い、PC幅でメニューが2行に折り返さないよう調整 */
+@media(min-width:1041px){.global-nav a,.header-cta{white-space:nowrap}}
+@media(min-width:1041px) and (max-width:1279px){.global-nav{display:none}.menu-button{display:block;margin-left:auto}.global-nav.open{display:flex;position:absolute;left:20px;right:20px;top:76px;background:#fff;border-radius:18px;padding:20px;box-shadow:var(--shadow);flex-direction:column}}
+@media(min-width:1280px) and (max-width:1439px){.global-nav{gap:12px}.global-nav a{font-size:12.5px}}
+
+/* 2026-10 プライバシーポリシーの表 */
+.table-scroll{overflow-x:auto;margin:16px 0}
+.article-content table{border-collapse:collapse;width:100%;min-width:560px;font-size:13px}
+.article-content th,.article-content td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top;color:#435149}
+.article-content th{background:#f2f8f4;color:var(--ink);font-weight:800}
+
+/* 2026-10 代表者の顔写真を表示しない方針：写真の代わりにロゴと事業内容のデザインを表示 */
+.brand-mark-xl{width:84px;height:84px;border-radius:26px;font-size:44px}
+.brand-visual{position:relative;min-height:540px;border-radius:42px 42px 120px 42px;border:8px solid rgba(255,255,255,.85);box-shadow:var(--shadow);background:radial-gradient(circle at 85% 12%,rgba(207,230,159,.55),transparent 42%),linear-gradient(160deg,#ffffff 0%,var(--green-light) 100%);display:flex;flex-direction:column;justify-content:center;gap:34px;padding:70px 48px 80px}
+.brand-visual-logo{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
+.brand-visual-logo strong{font-size:26px;color:var(--ink);letter-spacing:.02em}
+.brand-visual-logo small{font-size:13px;font-weight:700;color:var(--green)}
+.brand-visual-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.brand-visual-list li{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px;font-size:14px;font-weight:700;color:var(--ink);box-shadow:0 8px 20px rgba(24,72,52,.06)}
+.brand-visual-list li span{flex:0 0 auto;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:var(--green-light);color:var(--green);font-weight:900}
+.profile-brand{min-height:470px;border-radius:38px;box-shadow:var(--shadow);background:radial-gradient(circle at 20% 15%,rgba(207,230,159,.5),transparent 45%),linear-gradient(160deg,#ffffff 0%,var(--green-light) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:48px 32px 90px;text-align:center}
+.profile-brand p{margin:0;font-size:16px;font-weight:700;line-height:1.8;color:var(--ink)}
+@media(max-width:900px){.brand-visual{min-height:0;padding:150px 22px 96px;gap:26px}.brand-visual-list li{font-size:13px;padding:10px 12px}.profile-brand{min-height:340px}}
+@media(max-width:420px){.brand-visual-list{grid-template-columns:1fr}.brand-mark-xl{width:72px;height:72px;font-size:38px}.brand-visual-logo strong{font-size:22px}}
